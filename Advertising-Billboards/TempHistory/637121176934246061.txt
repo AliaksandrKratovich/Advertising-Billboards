@@ -1,0 +1,4 @@
+2019-12-16 16:49:51|INFO|1|User Advertising_Billboards.Models.User deleted device 1 from device group 1 |url: https://localhost/User/DeleteDeviceInGroup
+2019-12-16 16:49:52|INFO|1|User Advertising_Billboards.Models.User deleted device 2 from device group 1 |url: https://localhost/User/DeleteDeviceInGroup
+2019-12-16 16:49:54|INFO|1|User Advertising_Billboards.Models.User added device 2 to device group 1 |url: https://localhost/User/AddDeviceToGroup
+2019-12-16 16:49:56|INFO|1|User Advertising_Billboards.Models.User added device 1 to device group 1 |url: https://localhost/User/AddDeviceToGroup2019-12-16 17:53:19|ERROR|An unhandled exception has occurred while executing the request. |url: https://localhost/Administrator/Logs

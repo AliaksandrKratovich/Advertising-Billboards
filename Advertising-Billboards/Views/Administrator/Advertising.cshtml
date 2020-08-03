@@ -1,0 +1,45 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model Advertising_Billboards.Models.Advertisement
+@{
+    ViewData["Title"] = "Advertising";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Advertising</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <script>
+        function setCurTime(time) {
+            vid.currentTime = time;
+        }
+    </script>
+</head>
+<body>
+
+    <div class="m-3">
+        <h2 class="m-3">Device advertising: </h2>
+        @*onload="setCurTime(1)"*@
+        <div class="m-5 d-flex justify-content-center">
+            <video id="myVideo" width="400" autoplay onclick="Reload()">
+                <source src="~/Videos/@Model.FileName" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+
+</body>
+
+<script type='text/javascript'>
+    var vid = document.getElementById("myVideo");
+    var canReload = false;
+    function Reload() {
+        if (canReload === true) {
+            location.href = '@Url.Action("VideoEnding","Administrator",new {deviceId = @Model.Device.Id})';
+        }
+    }
+    function LetToReload() {
+        canReload = true;
+    }
+    setTimeout(LetToReload, 1000);
+</script>

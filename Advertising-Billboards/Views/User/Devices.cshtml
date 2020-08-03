@@ -1,0 +1,73 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model Advertising_Billboards.ModelsView.UserDevicesModelView
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Devices</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/Styles/StyleSheet.css" />
+</head>
+<body>
+
+    <div style="margin: 2% 8%;">
+        <h2>All enable devices: </h2>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Status</th>
+                    @*<th scope="col">Group</th>*@
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @for (int i = 0; i < Model.Devices.Count(); ++i)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>Work</td>
+                        @*<td>@(device.Id + 10)</td>*@
+                        <td class="btn-group" role="group" aria-label="Basic example">
+                            <form class="form-inline" asp-action="SubmitFrequency"
+                                  asp-route-deviceId="@Model.Devices.ElementAt(i).Id">
+                                <div class="input-group mb-4">
+                                    <button type="submit" class="btn btn-dark">Submit frequency</button>
+                                    <input type="number" name="frequency" placeholder="display frequency">
+                                </div>
+                            </form>
+                        </td>
+                        <td class="btn-group mr-3" role="group" aria-label="Basic example">
+                            <div class="btn-group">
+                                <form class="form-inline" asp-action="ImportFrequency"
+                                      asp-controller="User" 
+                                      asp-route-deviceId="@Model.Devices.ElementAt(i).Id"
+                                      method="post" enctype="multipart/form-data">
+                                    <span class="btn btn-primary btn-file">
+                                        Browse <input type="file"  name="uploadedFile">
+                                    </span>
+                                    <input type="submit" class="btn btn-secondary" value="Import frequency" />
+                                </form>
+                            </div>
+                            <div class="btn-group ml-4">
+                                <form method="post" asp-action="ExportFrequency" asp-route-deviceId="@Model.Devices.ElementAt(i).Id">
+                                    <button type="submit" class="btn btn-secondary" >Export frequency</button>
+                                </form>
+                                <a class="btn btn-info mr-3" asp-action="Advertising" asp-route-deviceId="@Model.Devices.ElementAt(i).Id">View advertising list</a>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</body>
+

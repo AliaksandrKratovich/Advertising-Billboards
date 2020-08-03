@@ -1,0 +1,44 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model IEnumerable<Advertising_Billboards.Models.User>
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Users</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <form class="form-inline m-4" method="post" asp-action="AddUser">
+        <div class="input-group mb-4">
+            <button type="submit" class="btn btn-primary">Add User</button>
+            <input type="text" required  name="name" class="form-control" placeholder="Enter the name of user">
+        </div>
+    </form>
+    <div style="margin: 2% 8%;">
+        <h2>Users: </h2>
+        <ul class="list-group justify-content-center">
+            @foreach (User user in Model)
+            {
+                <li class="list-group-item">
+                    @user.UserName
+                    <form method="post" asp-action="DeleteUser" 
+                          asp-route-id="@user.Id"
+                          asp-route-Devices="@user.Devices"
+                          asp-route-DeviceGroups="@user.DeviceGroups"
+                          asp-route-UserName="@user.UserName">
+                        <button type="submit" class="btn btn-danger float-right">Delete</button>
+                    </form>
+                    
+                    <a  class="btn btn-secondary float-right mr-3" asp-action="Logs" asp-route-userId="@user.Id">View logs</a>
+                </li>
+            }
+        </ul>
+    </div>
+</body>
+
+

@@ -1,0 +1,59 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model Advertising_Billboards.ModelsView.DeviceAdvertisingsView
+@{
+    ViewData["Title"] = "Advertising";
+    Layout = "~/Views/User/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Advertising</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/Styles/StyleSheet.css" />
+</head>
+<body>
+
+    <div class="m-3">
+        <div class="btn-group mr-3" role="group" aria-label="Basic example">
+            <div class="btn-group">
+                <form class="form-inline" asp-action="UploadVideo"
+                      asp-route-deviceId="@Model.Device.Id"
+                      method="post" enctype="multipart/form-data" >
+                    <span class="btn btn-primary btn-file">
+                        Browse <input type="file" name="uploadedVideo" accept="video/mp4">
+                    </span>
+                    <input type="submit" class="btn btn-dark" value="Upload video" />
+                </form>
+            </div>
+        </div>
+        <h2 class="m-3">Device advertising: </h2>
+        <ul class="list-group justify-content-center">
+
+            @foreach (Advertisement advertisement in Model.Advertisements)
+            {
+            <li class="list-group-item">
+                <div class="m-5 d-flex justify-content-center">
+                    <video controls mutted width="480">
+                        <source src="~/Videos/@advertisement.FileName" type="video/mp4">
+                        @*<object data="video.swf" type="application/x-shockwave-flash">
+                    <param name="movie" value="video.swf">
+                </object>*@
+                    </video>
+                </div>
+                <ul class="list-group justify-content-center">
+                   
+                    <li class="list-group-item">
+                        <a class="btn btn-info" asp-action="AdvertisingStatistics"  asp-route-advId="@advertisement.Id">View statistics</a>
+                        <a class="btn btn-danger" asp-action="DeleteAdvertising" asp-route-advId="@advertisement.Id" asp-route-deviceId="@advertisement.Device.Id">
+                            Delete
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            }
+        </ul>
+    </div>
+</body>
+

@@ -1,0 +1,48 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model IEnumerable<Advertising_Billboards.Models.UserLog>
+@{
+    ViewData["Title"] = "Logs";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Logs</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+
+    <form class="form-inline m-4" asp-action="DownLoadLogs" asp-route-userId="@Model?.ElementAt(0).UserId">
+        <div class="input-group mb-4">
+            <button type="submit" class="btn btn-dark">Download history</button>
+            <div class="input-group">
+                <input class="form-control" type="datetime" name="startPeriod" placeholder="Period start">
+                <input class="form-control" type="datetime" name="finishPeriod" placeholder="Period finish">
+            </div>
+        </div>
+    </form>
+
+    <div class="m-3">
+
+        <h2 class="m-3">User activity history: </h2>
+        <ul class="list-group justify-content-center">
+
+            @foreach (UserLog userLog in Model)
+            {
+                <li class="list-group-item">
+                    <ul class="list-group justify-content-center">
+                        <li class="list-group-item">@userLog.LogTime</li>
+                        <li class="list-group-item"> @userLog.ActionMessage</li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+
+</body>
+
+
+

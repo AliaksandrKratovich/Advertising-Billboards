@@ -1,0 +1,61 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Advertising_Billboards.Models
+@model Advertising_Billboards.ModelsView.UsersDeviceGroupsModelView
+@{
+    ViewData["Title"] = "DeviceGroups";
+    Layout = "~/Views/Administrator/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Device groups</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <form class="form-inline m-4" method="post" asp-controller="Administrator" asp-action="AddDeviceGroup">
+        <div class="input-group mb-4">
+            <button type="submit" class="btn btn-primary">Add device group</button>
+            <select class="custom-select" name="id" required>
+                <option selected value="">Choose user</option>
+                @for (var i = 0; i < @Model.Users.Count(); ++i)
+                {
+                    <option value="@Model.Users.ElementAt(i).Id">
+                        @Model.Users.ElementAt(i).UserName
+                    </option>
+                }
+            </select>
+        </div>
+    </form>
+
+    <div style="margin: 2% 8%;">
+        <h2>Device groups: </h2>
+        <table class="table ">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @for (int i = 0; i < Model.DeviceGroups.Count(); ++i)
+            {
+                <tbody>
+                    <tr>
+                        <th scope="row">"@(i + 1)</th>
+                        <td>@Model.DeviceGroups.ElementAt(i).User.UserName</td>
+                        <td class="btn-group-toggle float-right">
+                            <form method="post" asp-action="DeleteDeviceGroup" asp-route-id="@Model.DeviceGroups.ElementAt(i).Id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</body>
+
+
+

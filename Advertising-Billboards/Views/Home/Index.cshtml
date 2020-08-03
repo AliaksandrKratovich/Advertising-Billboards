@@ -1,0 +1,26 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Advertising_Billboards.Models.User>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sign in</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+
+</head>
+<body>
+    <div class="text-center ">
+        <div class="btn-toolbar btn-group-vertical align-items-md-center">
+            <a href="@Url.Action("Users", "Administrator")" class="btn btn-primary btn-lg mt-2">Enter as administrator</a>
+        </div>
+        <h2 class="mt-5">All enable users:</h2>
+        <div class="list-group">
+            @foreach (var user in Model)
+            {
+                <a class="list-group-item list-group-item-action" asp-controller="User" asp-action="Devices" asp-route-userId="@user.Id">@user.UserName</a>
+            }
+        </div>
+    </div>
+</body>

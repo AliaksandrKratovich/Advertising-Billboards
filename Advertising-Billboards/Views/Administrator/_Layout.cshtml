@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+</head>
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm bg-dark">
+        <h1 class="navbar-brand">Administrator</h1>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Devices">Devices</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="DeviceGroups">Device groups</a>
+            </li>
+            <li class="nav-item ml-5">
+                <span class="navbar-text text-muted mr-4">Users:<span class="text-info">@ViewBag.UserAmount</span></span>
+                <span class="navbar-text text-muted mr-4">Devices: <span class="text-info">@ViewBag.DeviceAmount</span></span>
+                <span class="navbar-text text-muted mr-4">Files: <span class="text-info">@ViewBag.FileAmount</span></span>
+            </li>
+        </ul>
+        <a class="navbar-nav ml-auto" asp-controller="Home" asp-action="Index">Log Out</a>
+    </nav>
+
+    @RenderBody()
+</body>
